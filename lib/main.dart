@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:world_time_app/pages/home.dart';
+import 'package:http_demo/pages/home.dart';
 
 void main() => runApp(MaterialApp(
-  title: 'Material App',
+  title: 'HTTP Demo',
   home: Home(),
 ));
-

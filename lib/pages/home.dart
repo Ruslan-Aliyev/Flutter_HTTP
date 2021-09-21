@@ -1,21 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
-
-class Album {
-  final String title;
-
-  Album({
-    this.title
-  });
-
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      title: json['title'],
-    );
-  }
-}
+import 'package:http_demo/models/album.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -32,7 +20,16 @@ class _HomeState extends State<Home> {
   }
 
   Future<List<Album>> fetchAlbums() async {
-    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/albums'));
+
+    //final auth = whatever auth request
+    //get your_api_token_here out of auth
+
+    final response = await http.get(
+      Uri.parse('https://jsonplaceholder.typicode.com/albums'),
+      headers: {
+        HttpHeaders.authorizationHeader: 'Basic your_api_token_here',
+      },
+    );
 
     if (response.statusCode == 200) {
       List rawList = jsonDecode(response.body).toList();
